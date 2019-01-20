@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:TimerXamainForms.Converters"
+             x:Class="TimerXamainForms.Views.CountDownPage">
+
+    <ContentPage.Resources>
+        <Style x:Key="Title" TargetType="Label">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="Clock" TargetType="Label">
+            <Setter Property="FontSize" Value="45" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="VerticalOptions" Value="End" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="Separator" TargetType="Label">
+            <Setter Property="Text" Value=":" />
+            <Setter Property="FontSize" Value="45" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="VerticalOptions" Value="End" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="Margin" Value="5,0,5,5" />            
+        </Style>
+        <Style x:Key="Label" TargetType="Label">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="HorizontalOptions" Value="Center" />            
+        </Style>
+        <Style x:Key="Finish" TargetType="Label">
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="TextColor" Value="Red" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+
+        <converters:InvertedBoolConverter x:Key="invertedBoolConverter" />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Label Text="{Binding Title}"
+                   Style="{StaticResource Title}" />
+
+            <StackLayout VerticalOptions="Start"
+                         HorizontalOptions="End"
+                         Orientation="Horizontal"
+                         Margin="10">
+                
+                <Image x:Name="settingsImage"
+                       Source="Settings.png"
+                       WidthRequest="28" />
+            </StackLayout>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="{Binding Days}"
+                           Style="{StaticResource Clock}"
+                           IsVisible="{Binding DaysVisible}"
+                           Grid.Row="0"
+                           Grid.Column="0" />
+                    <Label Style="{StaticResource Separator}"
+                           IsVisible="{Binding DaysVisible}"
+                           Grid.Row="0"
+                           Grid.Column="1" />
+                    <Label Text="{Binding Hours, StringFormat='{0:00}'}"
+                           Style="{StaticResource Clock}"
+                           IsVisible="{Binding HoursVisible}"
+                           Grid.Row="0"
+                           Grid.Column="2" />
+                    <Label Style="{StaticResource Separator}"
+                           IsVisible="{Binding HoursVisible}"
+                           Grid.Row="0"
+                           Grid.Column="3" />
+                    <Label Text="{Binding Minutes, StringFormat='{0:00}'}"
+                           Style="{StaticResource Clock}"
+                           IsVisible="{Binding MinutesVisible}"
+                           Grid.Row="0"
+                           Grid.Column="4" />
+                    <Label Style="{StaticResource Separator}"
+                           IsVisible="{Binding MinutesVisible}"
+                           Grid.Row="0"
+                           Grid.Column="5" />
+                    <Label Text="{Binding Seconds, StringFormat='{0:00}'}"
+                           Style="{StaticResource Clock}"
+                           IsVisible="{Binding SecondsVisible}"
+                           Grid.Row="0"
+                           Grid.Column="6" />
+
+                    <Label Text="{Binding DaysLabel}"
+                           Style="{StaticResource Label}"    
+                           IsVisible="{Binding DaysVisible}"
+                           Grid.Row="1"
+                           Grid.Column="0" />
+                    <Label Text="{Binding HoursLabel}"
+                           Style="{StaticResource Label}" 
+                           IsVisible="{Binding HoursVisible}"
+                           Grid.Row="1"
+                           Grid.Column="2" />
+                    <Label Text="{Binding MinutesLabel}"
+                           Style="{StaticResource Label}" 
+                           IsVisible="{Binding MinutesVisible}"
+                           Grid.Row="1"
+                           Grid.Column="4" />
+                    <Label Text="{Binding SecondsLabel}"
+                           Style="{StaticResource Label}" 
+                           IsVisible="{Binding SecondsVisible}"
+                           Grid.Row="1"
+                           Grid.Column="6" />
+                </Grid>
+            </Grid>
+
+            <Label Text="Время истекло!" 
+                   Style="{StaticResource Finish}"
+                   IsVisible="{Binding SecondsVisible, Converter={StaticResource invertedBoolConverter}}"
+                   Grid.RowSpan="2" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

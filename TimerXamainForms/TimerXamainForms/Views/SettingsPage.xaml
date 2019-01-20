@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TimerXamainForms.Views.SettingsPage"
+             Title="Настройки">
+
+    <ContentPage.Resources>
+        <Style x:Key="Label" TargetType="Label">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Margin" Value="0,11" />
+        </Style>
+        <Style x:Key="Input" TargetType="Entry">
+            <Setter Property="Margin" Value="0,11" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <Style x:Key="InputDateTime" TargetType="DatePicker">
+            <Setter Property="Margin" Value="0,11" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <Style x:Key="InputDate" TargetType="TimePicker" BasedOn="InputDateTime" />
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>   
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="15" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Подпись: "
+                   Style="{StaticResource Label}"   
+                   Grid.Row="0"
+                   Grid.Column="1" />
+            <Entry Text="{Binding Title}" 
+                   Style="{StaticResource Input}"
+                   Grid.Row="0"
+                   Grid.Column="2"/>
+            <Label Text="Дата события: "
+                   Style="{StaticResource Label}"  
+                   Grid.Row="1"
+                   Grid.Column="1" />
+            <DatePicker Date="{Binding EndDate}"
+                        Style="{StaticResource InputDateTime}"
+                        Grid.Row="1"
+                        Grid.Column="2" />
+            <Label Text="Время события: "
+                   Style="{StaticResource Label}"  
+                   Grid.Row="2"
+                   Grid.Column="1" />
+            <TimePicker Time="{Binding EndTime}"
+                        Style="{StaticResource InputDateTime}"
+                        Grid.Row="2"
+                        Grid.Column="2" />
+
+            <Button Text="Сохранить"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,10"  
+                    Padding="10"
+                    BackgroundColor="WhiteSmoke"
+                    FontSize="20"                
+                    Command="{Binding SaveClick}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
